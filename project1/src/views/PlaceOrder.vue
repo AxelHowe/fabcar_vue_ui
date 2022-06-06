@@ -242,10 +242,10 @@ export default {
                 invoice:"",
                 inote: "",
             //交易資訊
-                volume: "",
-                cvolume: "",
-                sbad: "",
-                ntraded: "",
+                volume: 0,
+                cvolume: 0,
+                sbad: 0,
+                ntraded: 0,
             //訂單狀態
                 oestablished: false,
                 ocargo: false,
@@ -551,7 +551,7 @@ export default {
         },
         changeStatus(state) {//點選上面流程狀態時改變禁用欄位
             //改變狀態/新增訂單前先清空所有欄位禁用
-            var arr_init=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","a13","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
+            var arr_init=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","a13","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
             this.checkDisable.check1=false;
             this.checkDisable.check2=false;
             this.checkDisable.check3=false;
@@ -588,7 +588,6 @@ export default {
                 this.checkDisable.check5=true;
                 this.checkDisable.check6=true;
                 this.rule={
-                    key:[{required: true, message:"欄位不可為空！"}],
                     urgent:[{required: true, message:"欄位不可為空！"}],
                     odate:[{required: true, message:"欄位不可為空！"}],
                     ddate:[{required: true, message:"欄位不可為空！"}],
@@ -610,7 +609,6 @@ export default {
                 this.rule={
                     signer:[{required: true, message:"欄位不可為空！"}],
                     note:[{required: true, message:"欄位不可為空！"}],
-                    oestablished:[{required: true, message:"欄位不可為空！"}],
                 }
             } else if (state == 3) {//供應商交貨
                 arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];    
@@ -689,6 +687,9 @@ export default {
                     finish:[{required: true, message:"欄位不可為空！"}],                  
                 }    
             }
+            this.$nextTick(function () {
+                this.$refs['form'].clearValidate();
+            });
             arr.forEach(function(value){
                 document.getElementById(value).disabled = true;
                 document.getElementById(value).style ="background-color:#e6ecf5; border-radius: 5px; cursor:not-allowed;";
