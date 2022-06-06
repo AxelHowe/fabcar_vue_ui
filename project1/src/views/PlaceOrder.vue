@@ -37,107 +37,107 @@
             <div class="info">
                 <h2>訂單資訊</h2>
                 <div class="list">
-                    <el-form-item label="訂單編號">
+                    <el-form-item label="訂單編號" prop="key">
                         <el-input v-model="form.key" id="a1"></el-input>
                     </el-form-item>
-                    <el-form-item label="流程狀態">
+                    <el-form-item label="流程狀態" prop="process">
                         <el-input v-model="form.process" id="a2"></el-input>
                     </el-form-item>
-                    <el-form-item label="交貨急迫性">
+                    <el-form-item label="交貨急迫性" prop="urgent">
                         <el-input v-model="form.urgent" id="a3"></el-input>
                     </el-form-item>
-                    <el-form-item label="訂單日期">
+                    <el-form-item label="訂單日期" prop="odate">
                         <el-date-picker type="date" v-model="form.odate" id="a4" style="width: 100%;" :clearable=false></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="預交日期">
-                        <el-date-picker type="date" v-model="form.odate" id="a5" style="width: 100%;" :clearable=false></el-date-picker>
+                    <el-form-item label="預交日期" prop="ddate">
+                        <el-date-picker type="date" v-model="form.ddate" id="a5" style="width: 100%;" :clearable=false></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="採購人員">
+                    <el-form-item label="採購人員" prop="purchase">
                         <el-input v-model="form.purchase" id="a6"></el-input>
                     </el-form-item>
-                    <el-form-item label="供應商代號">
+                    <el-form-item label="供應商代號" prop="sname">
                         <el-input v-model="form.sname" id="a7"></el-input>
                     </el-form-item>
-                    <el-form-item label="供應商名稱">
+                    <el-form-item label="供應商名稱" prop="supplier">
                         <el-input v-model="form.supplier" id="a8"></el-input>
                     </el-form-item>
-                    <el-form-item label="供應商簽署人員">
+                    <el-form-item label="供應商簽署人員" prop="signer">
                         <el-input v-model="form.signer" id="a9"></el-input>
                     </el-form-item>
                 </div>
                 <div class="book">
-                    <el-form-item label="品名">
+                    <el-form-item label="採購品名" prop="pname">
                         <el-input v-model="form.pname" id="a10"></el-input>
                     </el-form-item>
-                    <el-form-item label="單價">
-                        <el-input v-model="form.price" id="a11"></el-input>
+                    <el-form-item label="採購數量" prop="pquantity">
+                        <el-input v-model="form.pquantity" id="a11"></el-input>
                     </el-form-item>
-                    <el-form-item label="數量">
-                        <el-input v-model="form.pquantity" id="a12"></el-input>
-                    </el-form-item>
+                    <el-form-item label="採購單價" prop="price">
+                        <el-input v-model="form.price" id="a12"></el-input>
+                    </el-form-item>               
                     <el-form-item label="總金額">
                         <span>{{this.form.price * this.form.pquantity}}</span>
                     </el-form-item>
-                    <el-form-item label="備註">
+                    <el-form-item label="備註" prop="note">
                         <el-input type='textarea' rows=11 show-word-limit v-model="form.note" id="a13"></el-input>
                     </el-form-item>
                 </div>
             </div>  
             <div class="deliverOrder">
                 <h2>交貨單</h2>
-                <el-form-item label="交貨日期">
+                <el-form-item label="交貨日期" prop="sdate">
                     <el-date-picker type="date" v-model="form.sdate" style="width:100%;" id="b1" :clearable=false></el-date-picker>
                 </el-form-item>
-                <el-form-item label="交貨數量">
-                    <el-input v-model="form.pname" id="b2"></el-input>
+                <el-form-item label="交貨數量" prop="amount">
+                    <el-input v-model="form.amount" id="b2"></el-input>
                 </el-form-item>
-                <el-form-item label="交貨備註">
-                    <el-input v-model="form.amount" id="b3"></el-input>
+                <el-form-item label="交貨備註" prop="snote">
+                    <el-input v-model="form.snote" id="b3"></el-input>
                 </el-form-item>
             </div>
             <div class="inspect">
                 <h2>驗貨單</h2>
-                <el-form-item label="驗貨日期">
-                    <el-date-picker type="date" v-model="form.sdate" style="width:100%;" id="c1" :clearable=false></el-date-picker>
+                <el-form-item label="驗貨日期" prop="bdate">
+                    <el-date-picker type="date" v-model="form.bdate" style="width:100%;" id="c1" :clearable=false></el-date-picker>
                 </el-form-item>
-                <el-form-item label="驗貨數量">
-                    <el-input v-model="form.bad" id="c2"></el-input>
+                <el-form-item label="驗貨數量" prop="c_amount">
+                    <el-input v-model="form.c_amount" id="c2"></el-input>
                 </el-form-item>
-                <el-form-item label="不良品數量">
+                <el-form-item label="不良品數量" prop="bad">
                     <el-input v-model="form.bad" id="c3"></el-input>
                 </el-form-item>
-                <el-form-item label="不良品備註">
-                    <el-input v-model="form.badnote" id="c4"></el-input>
+                <el-form-item label="不良品備註" prop="bnote">
+                    <el-input v-model="form.bnote" id="c4"></el-input>
                 </el-form-item>
             </div>
             <div class="deliverInfo">
-                <h2>交貨資訊</h2>
+                <h2>交易資訊</h2>
                 <el-form-item label="已交貨總數">
-                    <el-input v-model="form.volume" id="d1"></el-input>
+                    <span>{{this.form.cvolume - this.form.sbad}}</span>
                 </el-form-item>
                 <el-form-item label="已驗貨總數">
-                    <el-input v-model="form.volume" id="d2"></el-input>
+                    <span>{{this.form.cvolume}}</span>
                 </el-form-item>
                 <el-form-item label="不良品總數">
-                    <el-input v-model="form.sbad" id="d3"></el-input>
+                    <span>{{this.form.sbad}}</span>
                 </el-form-item>
                 <el-form-item label="未交貨總數">
-                    <span>{{this.form.volume - this.form.sbad}}</span>
+                    <span>{{this.form.pquantity - (this.form.cvolume - this.form.sbad)}}</span>
                 </el-form-item>
             </div>
             <div class="invoice">
                 <h2>發票資訊</h2>
-                <el-form-item label="發票日期">
-                    <el-date-picker type="date" v-model="form.sdate" style="width:100%;" id="f1" :clearable=false></el-date-picker>
+                <el-form-item label="發票日期" prop="idate">
+                    <el-date-picker type="date" v-model="form.idate" style="width:100%;" id="f1" :clearable=false></el-date-picker>
                 </el-form-item>
-                <el-form-item label="發票號碼">
-                    <el-input v-model="form.volume" id="f2"></el-input>
+                <el-form-item label="發票號碼" prop="invoice">
+                    <el-input v-model="form.invoice" id="f2"></el-input>
                 </el-form-item>
-                <el-form-item label="備註">
-                    <el-input v-model="form.sbad" id="f3"></el-input>
+                <el-form-item label="備註" prop="inote">
+                    <el-input v-model="form.inote" id="f3"></el-input>
                 </el-form-item>
             </div>
-            <el-form-item class="send" >
+            <el-form-item class="send">
                 <el-button type="primary" @click="onSubmit()" :disabled="checkDisable.check7">儲存訂單</el-button><!--TODO:顯示歷史狀態時要隱藏-->
                 <el-button @click="cancel()" :disabled="checkDisable.check8">取消更改</el-button>
             </el-form-item>
@@ -153,10 +153,7 @@
         </el-form>
     </div>
     <div class="menu">
-		<el-menu
-        default-active="1"
-        class="el-menu-vertical-demo undone"
-        style="height: 41%; overflow: auto; scroll:auto;">
+		<el-menu default-active="1" class="el-menu-vertical-demo undone" style="height: 41%; overflow: auto; scroll:auto;">
             <el-submenu index="100">
                 <template slot="title">未完成訂單</template>
                 <!--顯示每一筆訂單 -->
@@ -164,28 +161,23 @@
                     <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">訂單{{item.key}}</el-button></template>
                     <!--顯示歷史狀態 -->
                     <el-timeline style="height: 150px; overflow: auto; scroll:auto;">
-                        <el-timeline-item
-                        v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
+                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
                             <el-button type="text" @click="showUndoneHistory(history.Report)">{{history.Report.process}}</el-button>
                         </el-timeline-item>
                     </el-timeline>
                 </el-submenu>
             </el-submenu>
         </el-menu>
-        <el-input placeholder="搜尋..." prefix-icon="el-icon-search" clearable class="find" ></el-input>
-        <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo done"
-        style="height: 45%;">
+        <el-input placeholder="搜尋訂單" prefix-icon="el-icon-search" class="find" clearable v-model="find"></el-input>
+        <el-menu default-active="2" class="el-menu-vertical-demo done" style="height: 45%;">
 			<el-submenu index="200">
                 <template slot="title">已完成訂單</template>
                 <!--顯示每一筆訂單 -->
-                <el-submenu :index=index v-for="(item, index) in done" :key="index">
-                    <template slot="title">訂單{{item.key}}</template>
+                <el-submenu :index=String(index) v-for="(item, index) in done" :key="index">
+                    <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">訂單{{item.key}}</el-button></template>
                     <!--顯示歷史狀態 -->
                     <el-timeline style="height: 150px; overflow: auto; scroll:auto;">
-                        <el-timeline-item
-                        v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
+                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
                             <el-button type="text" @click="showDoneHistory(history.Report)">{{history.Report.process}}</el-button>
                         </el-timeline-item>
                     </el-timeline>
@@ -212,27 +204,17 @@ export default {
                 check7:false,//儲存
                 check8:false,//取消修改
             },
-            url:"/createReports",
+            temp:0,
+            after:"",
+            find:"",//搜尋已完成的關鍵字
+            url:"/createReports",//預設API
             proStatus: 0,
-            isRouterAlive: true,
             process:"",
-            role: this.GLOBAL.role,
-            user_name: this.GLOBAL.account,
-            rule:{//表單驗證規則
-                a3:[{}],
-                a4:[],
-                a5:[],
-                a6:[],
-                a7:[],
-                a8:[],
-                a9:[],
-                a10:[],
-
-                title: [{required: true, message:"欄位不可為空"},
-                        {min: 0, max: 10, message:"不可超過10個字"}],
-                date: [{required: true, message:"欄位不可為空"}]
-            },
+            role: localStorage.getItem('role'),
+            user_name: localStorage.getItem('username'),
+            rule:{},//表單驗證規則
             form: {//顯示在欄位上的資料
+            //訂單資訊
 				key:"",
                 process:"",
                 urgent:"",
@@ -241,352 +223,159 @@ export default {
                 purchase:"",
                 sname: "",
                 supplier:"",
-                signer: "",
-                invoice:"",
+                signer: "",            
                 pname:"",
                 pquantity: "",
                 price: "",
+                note: "",
+            //交貨單
                 sdate: "",
                 amount: "",
-                sbad: "",
+                snote:"",
+            //驗貨單
+                bdate: "",
+                c_amount: "",
+                bad: "",
+                bnote: "",
+            //發票資訊
+                idate: "",
+                invoice:"",
+                inote: "",
+            //交易資訊
                 volume: "",
+                cvolume: "",
+                sbad: "",
                 ntraded: "",
-                oestablished: "false",
-                ocargo: "false",
-                ccargo: "false",
-                bill: "false",
-                cbill: "false",
-                finish: "false",
-                note: ""
+            //訂單狀態
+                oestablished: false,
+                ocargo: false,
+                ccargo: false,
+                bill: false,
+                cbill: false,
+                finish: false,                            
             },
-            done:[//已完成訂單
-            ],
-            undone:[//未完成訂單
+            done:[
                 {
-                    "key": "A66",
-                    "process": "發包中",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys": [
-                        {
-                            "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
-                            "Report": {
-                                "key": "",
-                                "process": "簽署成功",
-                                "urgent": "1s",
-                                "odate": "1d",
-                                "ddate": "1b",
-                                "purchase": "1e",
-                                "sname": "1",
-                                "supplier": "1",
-                                "signer": "",
-                                "invoice": "",
-                                "pname": "1",
-                                "pquantity": "1",
-                                "price": "1",
-                                "sdate": "",
-                                "amount": "",
-                                "sbad": "",
-                                "volume": "",
-                                "ntraded": "",
-                                "oestablished": "",
-                                "ocargo": "",
-                                "ccargo": "",
-                                "bill": "",
-                                "cbill": "",
-                                "finish": "",
-                                "note": "1",
-                                "Historys": null
-                            }
-                        },
-                        {
-                            "TxId": "3a646c606fb9def06af9cca7196eecf72f3543b69030424c0fc2c486e8dae94b",
-                            "Report": {
-                                "key": "",
-                                "process": "發包中",
-                                "urgent": "1s",
-                                "odate": "1d",
-                                "ddate": "1b",
-                                "purchase": "1e",
-                                "sname": "1",
-                                "supplier": "1",
-                                "signer": "mamaya",
-                                "invoice": "",
-                                "pname": "1",
-                                "pquantity": "1",
-                                "price": "1",
-                                "sdate": "",
-                                "amount": "",
-                                "sbad": "",
-                                "volume": "",
-                                "ntraded": "",
-                                "oestablished": "1",
-                                "ocargo": "",
-                                "ccargo": "",
-                                "bill": "",
-                                "cbill": "",
-                                "finish": "",
-                                "note": "1",
-                                "Historys": null
-                            }
-                        },
-                        {
-                            "TxId": "ff4df9ed1f0b3a48127a7d73fb070464567c139bc7620c5780ef0687957fcb30",
-                            "Report": {
-                                "key": "",
-                                "process": "驗貨中",
-                                "urgent": "1s",
-                                "odate": "1d",
-                                "ddate": "1b",
-                                "purchase": "1e",
-                                "sname": "1",
-                                "supplier": "1",
-                                "signer": "mamaya",
-                                "invoice": "",
-                                "pname": "1",
-                                "pquantity": "1",
-                                "price": "1",
-                                "sdate": "",
-                                "amount": "",
-                                "sbad": "",
-                                "volume": "",
-                                "ntraded": "",
-                                "oestablished": "1",
-                                "ocargo": "",
-                                "ccargo": "",
-                                "bill": "",
-                                "cbill": "",
-                                "finish": "",
-                                "note": "1",
-                                "Historys": null
-                            }
-                        },
-                        {
-                            "TxId": "4c9f14c9b5fed950cc5028799b715b6eb9487a398346c7a376397bb72f2811a9",
-                            "Report": {
-                                "key": "",
-                                "process": "交貨中",
-                                "urgent": "1s",
-                                "odate": "1d",
-                                "ddate": "1b",
-                                "purchase": "1e",
-                                "sname": "1",
-                                "supplier": "1",
-                                "signer": "mamaya",
-                                "invoice": "",
-                                "pname": "1",
-                                "pquantity": "1",
-                                "price": "1",
-                                "sdate": "100023",
-                                "amount": "1",
-                                "sbad": "",
-                                "volume": "",
-                                "ntraded": "",
-                                "oestablished": "1",
-                                "ocargo": "",
-                                "ccargo": "",
-                                "bill": "",
-                                "cbill": "",
-                                "finish": "",
-                                "note": "1",
-                                "Historys": null
-                            }
-                        },
-                        {
-                            "TxId": "616f73a911ead8ab803f2c25c2e844c6aea38e9a27efb7299150308e62b6c1ee",
-                            "Report": {
-                                "key": "",
-                                "process": "交貨完成",
-                                "urgent": "1s",
-                                "odate": "1d",
-                                "ddate": "1b",
-                                "purchase": "1e",
-                                "sname": "1",
-                                "supplier": "1",
-                                "signer": "mamaya",
-                                "invoice": "",
-                                "pname": "1",
-                                "pquantity": "1",
-                                "price": "1",
-                                "sdate": "100023",
-                                "amount": "1",
-                                "sbad": "12323",
-                                "volume": "",
-                                "ntraded": "",
-                                "oestablished": "1",
-                                "ocargo": "",
-                                "ccargo": "",
-                                "bill": "",
-                                "cbill": "",
-                                "finish": "",
-                                "note": "1",
-                                "Historys": null
-                            }
-                        },
-                    ],
+                    "key": "A1210",
+                    "process": "簽署成功",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": "turn",
+                    "ocargo": "true",
+                    "ccargo": "true",
+                    "bill": "true",
+                    "cbill": "true",
+                    "finish": "",
+                    "note": "無",
+                    "Historys": null
+                },{
+                    "key": "A1111",
+                    "process": "簽署成功",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": "turn",
+                    "ocargo": "true",
+                    "ccargo": "true",
+                    "bill": "true",
+                    "cbill": "true",
+                    "finish": "",
+                    "note": "無",
+                    "Historys": null
+                },{
+                    "key": "A1",
+                    "process": "簽署成功",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": "turn",
+                    "ocargo": "true",
+                    "ccargo": "true",
+                    "bill": "true",
+                    "cbill": "true",
+                    "finish": "",
+                    "note": "無",
+                    "Historys": null
                 },
+            ],//已完成訂單
+            undone:[
                 {
-                    "key": "A66",
-                    "process": "ooo",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys":null
-                },
-                {
-                    "key": "A66",
-                    "process": "ooo",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys":null
-                },
-                {
-                    "key": "A66",
-                    "process": "ooo",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys":null
-                },
-                {
-                    "key": "A66",
-                    "process": "ooo",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys":null
-                },
-                {
-                    "key": "A66",
-                    "process": "ooo",
-                    "urgent": "1s",
-                    "odate": "",
-                    "ddate": "",
-                    "purchase": "1e",
-                    "sname": "1",
-                    "supplier": "1",
-                    "signer": "mamaya",
-                    "invoice": "1",
-                    "pname": "1",
-                    "pquantity": "1",
-                    "price": "1",
-                    "sdate": "",
-                    "amount": "1",
-                    "sbad": "12323",
-                    "volume": "",
-                    "ntraded": "",
-                    "oestablished": "1",
-                    "ocargo": "1cccqqwwe",
-                    "ccargo": "12",
-                    "bill": "1",
-                    "cbill": "111112",
-                    "finish": "1",
-                    "note": "1",
-                    "Historys":null
+                    "key": "A0",
+                    "process": "簽署成功",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": "turn",
+                    "ocargo": "true",
+                    "ccargo": "true",
+                    "bill": "true",
+                    "cbill": "true",
+                    "finish": "",
+                    "note": "無",
+                    "Historys": null
                 }
-            ],
+            ],//未完成訂單
         };
     },
     methods: {
@@ -705,7 +494,8 @@ export default {
         },
         newOrder(){//清空欄位資料＆禁用
             this.form= {//先清空上個狀態的欄位資料
-                key:"",
+            //訂單資訊
+				key:"",
                 process:"",
                 urgent:"",
                 odate:"",
@@ -713,23 +503,36 @@ export default {
                 purchase:"",
                 sname: "",
                 supplier:"",
-                signer: "",
-                invoice:"",
+                signer: "",            
                 pname:"",
                 pquantity: "",
                 price: "",
+                note: "",
+            //交貨單
                 sdate: "",
                 amount: "",
-                sbad: "",
+                snote:"",
+            //驗貨單
+                bdate: "",
+                c_amount: "",
+                bad: "",
+                bnote: "",
+            //發票資訊
+                idate: "",
+                invoice:"",
+                inote: "",
+            //交易資訊
                 volume: "",
+                cvolume: "",
+                sbad: "",
                 ntraded: "",
-                oestablished: "false",
-                ocargo: "false",
-                ccargo: "false",
-                bill: "false",
-                cbill: "false",
-                finish: "false",
-                note: ""
+            //訂單狀態
+                oestablished: false,
+                ocargo: false,
+                ccargo: false,
+                bill: false,
+                cbill: false,
+                finish: false,   
             };
             this.changeStatus(0);//先清空欄位禁用
             this.url = "createReports";
@@ -747,7 +550,6 @@ export default {
             });
         },
         changeStatus(state) {//點選上面流程狀態時改變禁用欄位
-
             //改變狀態/新增訂單前先清空所有欄位禁用
             var arr_init=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","a13","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
             this.checkDisable.check1=false;
@@ -770,7 +572,7 @@ export default {
             })
 
             this.buttonDisabled(state);//處理被禁用的狀態按鈕
-            this.chageAPI(state);//改變每個流程所對應的API路徑
+            this.changeAPI(state);//改變每個流程所對應的API路徑
             this.initStatus(state);//更新欄位禁用狀態
         },
         initStatus(state) {//點某個狀態按鈕就會到這裡變成禁用
@@ -778,63 +580,114 @@ export default {
             this.selectRole();
             //getElementByClassName沒辦法改變disabled值，只有getElementById可以
             if (state == 1) {//新增訂單
-                arr=["a1","a2","a9","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
+                arr=["a1","a2","a9","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;
                 this.checkDisable.check5=true;
                 this.checkDisable.check6=true;
+                this.rule={
+                    key:[{required: true, message:"欄位不可為空！"}],
+                    urgent:[{required: true, message:"欄位不可為空！"}],
+                    odate:[{required: true, message:"欄位不可為空！"}],
+                    ddate:[{required: true, message:"欄位不可為空！"}],
+                    purchase:[{required: true, message:"欄位不可為空！"}],
+                    sname:[{required: true, message:"欄位不可為空！"}],
+                    supplier:[{required: true, message:"欄位不可為空！"}],
+                    pname:[{required: true, message:"欄位不可為空！"}],
+                    pquantity:[{required: true, message:"欄位不可為空！"}],
+                    price:[{required: true, message:"欄位不可為空！"}],
+                    note:[{required: true, message:"欄位不可為空！"}],
+                }
             } else if (state == 2) {//供應商簽署
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e2","e3","e4","e5","e6","f1","f2","f3"];    
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","e2","e3","e4","e5","e6","f1","f2","f3"];    
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;
                 this.checkDisable.check5=true;
                 this.checkDisable.check6=true;
+                this.rule={
+                    signer:[{required: true, message:"欄位不可為空！"}],
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    oestablished:[{required: true, message:"欄位不可為空！"}],
+                }
             } else if (state == 3) {//供應商交貨
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e5","e6","f1","f2","f3"];    
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];    
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;
                 this.checkDisable.check5=true;
-                this.checkDisable.check6=true;            
+                this.checkDisable.check6=true;    
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    sdate:[{required: true, message:"欄位不可為空！"}],                  
+                    amount:[{required: true, message:"欄位不可為空！"}],                  
+                    snote:[{required: true, message:"欄位不可為空！"}],
+                }        
             } else if (state == 4) {//中心廠驗貨
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","d1","d2","d3","e1","e2","e4","e5","e6","f1","f2","f3"]; 
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","e1","e2","e4","e5","e6","f1","f2","f3"]; 
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check4=true;
                 this.checkDisable.check5=true;
-                this.checkDisable.check6=true;               
+                this.checkDisable.check6=true;   
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    bdate:[{required: true, message:"欄位不可為空！"}],                  
+                    c_amount:[{required: true, message:"欄位不可為空！"}],                  
+                    bad:[{required: true, message:"欄位不可為空！"}],
+                    bnote:[{required: true, message:"欄位不可為空！"}],
+                    ccargo:[{required: true, message:"欄位不可為空！"}]
+                }               
             } else if (state == 5) {//中心廠確認交貨
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e3","e4","e5","e6","f1","f2","f3"];   
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","e1","e3","e4","e5","e6","f1","f2","f3"];   
                 this.checkDisable.check1=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;
                 this.checkDisable.check5=true;
-                this.checkDisable.check6=true;             
+                this.checkDisable.check6=true;
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    ocargo:[{required: true, message:"欄位不可為空！"}],                  
+                }                
             } else if (state == 6) {//供應商發票開立
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e5","e6"];
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e5","e6"];
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;   
                 this.checkDisable.check5=true;
-                this.checkDisable.check6=true;                
+                this.checkDisable.check6=true;  
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    idate:[{required: true, message:"欄位不可為空！"}],                  
+                    invoice:[{required: true, message:"欄位不可為空！"}],                  
+                    inote:[{required: true, message:"欄位不可為空！"}],
+                    bill:[{required: true, message:"欄位不可為空！"}],
+                }                 
             } else if (state == 7) {//中心廠確認發票開立
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e6","f1","f2","f3"];   
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e6","f1","f2","f3"];   
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;
-                this.checkDisable.check6=true;             
+                this.checkDisable.check6=true;    
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    cbill:[{required: true, message:"欄位不可為空！"}],                  
+                }            
             }else if (state == 8) {//中心廠確認訂單完成
-                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","d1","d2","d3","e1","e2","e3","e4","e5","f1","f2","f3"];   
+                arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e5","f1","f2","f3"];   
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
                 this.checkDisable.check4=true;   
-                this.checkDisable.check5=true;   
+                this.checkDisable.check5=true;  
+                this.rule={
+                    note:[{required: true, message:"欄位不可為空！"}],
+                    finish:[{required: true, message:"欄位不可為空！"}],                  
+                }    
             }
             arr.forEach(function(value){
                 document.getElementById(value).disabled = true;
@@ -865,7 +718,7 @@ export default {
                 document.getElementById(value).style ="color:gray; cursor:not-allowed;";
             });
         },
-        chageAPI(state){//改變每個流程所對應的API路徑
+        changeAPI(state){//改變每個流程所對應的API路徑
             if(state==1){
                 this.url="createReports";
             }else if(state==2){
@@ -888,12 +741,47 @@ export default {
         },
         cancel() {//「取消更改」按鈕
             var yes = confirm("確定要取消更改嗎？");
-            if (yes) {//直接重新匯入原本訂單資料，沒有要管驗證
-                // location.reload();//TODO:重新匯入資料
+            if (yes) {//直接重新匯入原本訂單資料
                 alert("修改已取消");
             }
         },
+        verifyForm(){
+            if(this.state===1){//新增訂單
+                if(!this.form.key || !this.form.urgent || !this.form.odate || !this.form.ddate || !this.form.purchase || !this.form.sname || !this.form.supplier || !this.form.pname || !this.form.pquantity || !this.form.price || !this.form.note){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===2){//供應商簽署
+                if(!this.form.signer || !this.form.note || this.form.oestablished==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===3){//供應商交貨
+                if(!this.form.note || !this.form.sdate || !this.form.amount || !this.form.snote){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===4){//中心廠驗貨
+                if(!this.form.note || !this.form.bdate || !this.form.c_amount || !this.form.bad || !this.form.bnote || this.form.ccargo==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===5){//中心廠確認交貨
+                if(!this.form.note || this.form.ocargo==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===6){//供應商發票開立
+                if(!this.form.note || !this.form.idate || !this.form.invoice || !this.form.inote || this.form.bill==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===7){//中心廠確認發票開立
+                if(!this.form.note || this.form.cbill==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }else if(this.state===8){//中心廠確認訂單完成
+                if(!this.form.note || this.form.finish==false){
+                    alert("請填寫完全部欄位！");
+                }
+            }
+        },
 		onSubmit() {//「儲存訂單」按鈕
+            this.verifyForm();
 			this.packagePostData();
 		},
         async packageGetData() {//導入訂單畫面的時候，會傳入所有訂單資料跟狀態 
@@ -933,29 +821,24 @@ export default {
             }
 
             //刷新頁面
-            this.$router.push({
-                name: 'PlaceOrder',
-                params: {
-                    role: this.GLOBAL.role,
-                    user_name: this.GLOBAL.account,
-                    token: this.GLOBAL.token
-                }
-            });
+            // this.$router.push({
+            //     name: 'PlaceOrder',
+            //     params: {
+            //         role: this.GLOBAL.role,
+            //         user_name: this.GLOBAL.account,
+            //         token: this.GLOBAL.token
+            //     }
+            // });
 
-            //重新把變數設定回來
-            this.GLOBAL.setAccount(this.$route.params.user_name);
-            this.GLOBAL.setToken(this.$route.params.token);
-            this.GLOBAL.setRole(this.$route.params.role);
+            // //重新把變數設定回來
+            // this.GLOBAL.setAccount(this.$route.params.user_name);
+            // this.GLOBAL.setToken(this.$route.params.token);
+            // this.GLOBAL.setRole(this.$route.params.role);
 
-            this.role=this.$route.params.role
-            this.user_name=this.$route.params.user_name
+            // this.role=this.$route.params.role
+            // this.user_name=this.$route.params.user_name
 
             this.packageGetData();
-        },
-        reload () {
-            // console.log('reload occure')
-            this.isRouterAlive = false;
-            this.$nextTick( ()=> { this.isRouterAlive=true } ) ;
         },
     },
     created() {
@@ -963,6 +846,25 @@ export default {
     },
     mounted(){
         this.selectRole();
+    },
+    watch:{//監聽搜尋欄位
+        find: function(){           
+            if(this.temp===0){//第一次進來這個函式
+                this.after=this.done;//把原始資料存在temp裡
+                this.temp++;
+            }
+            var matched=[];
+            if(!this.find){//沒有關鍵字
+                this.done=this.after;
+            }else{
+                for(let i=0; i<this.after.length; i++){
+                    if(this.after[i].key.match(this.find)!=null){//判斷有沒有這個訂單
+                        matched.push(this.after[i]);
+                    }
+                }
+                this.done=matched;
+            }    
+        },
     }
 };
 </script>

@@ -43,9 +43,9 @@ export default {
             let res = await this.$POST(url, params);//驗證登入帳密
 
             if(res.status===true){//如果有該使用者
-                this.GLOBAL.setAccount(this.form.username);
-                this.GLOBAL.setToken(res.token);
-                this.GLOBAL.setRole(res.role);
+                localStorage.setItem('username',this.form.username);
+                localStorage.setItem('token',res.token);
+                localStorage.setItem('role',res.role);
                 this.$router.push({path:'/placeorder'});
             }else{
                 document.getElementById("hide").style="display: block;"
@@ -54,6 +54,7 @@ export default {
     }
 };
 </script>
+
 <style scoped>
 .send{
     position: absolute;
@@ -89,4 +90,3 @@ export default {
     left:58%;
 }
 </style>
-

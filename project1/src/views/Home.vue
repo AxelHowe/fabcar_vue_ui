@@ -1,4 +1,3 @@
-<script src="http://localhost:8098"></script>
 <template>
 <div class="home">
     <router-view></router-view>
@@ -33,10 +32,10 @@ export default{
             title: [
                 {
                     svg:svg1,
-                    text:"幫您更安全地管理訂單"
+                    text:"oooooooooooooooo"
                 },{
                     svg:svg2,
-                    text:"輕鬆管理訂單系統"
+                    text:"oooooooooooooooo"
                 },{
                     svg:svg3,
                     text:"oooooooooooooooo"

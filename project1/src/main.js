@@ -10,9 +10,6 @@ Vue.prototype.$GET = GET
 Vue.prototype.$POST = POST
 Vue.prototype.$PUT = PUT
 
-import global_ from './views/Global'//引用檔案
-Vue.prototype.GLOBAL = global_
-
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 
