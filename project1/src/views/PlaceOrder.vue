@@ -1,7 +1,7 @@
 <template>
 <div class="placeorder">
     <div class="banner">
-        <el-button class="new_butt" type="primary" @click="newOrder()" plain>清空資料</el-button>
+        <el-button class="new_butt" type="primary" @click="newOrder()" style="cursor:pointer;" plain>清空資料</el-button>
         <div class="progress">
             <el-button type="text" @click="changeStatus(1)" id="1">新建訂單</el-button>
             <el-divider direction="vertical"></el-divider>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="input">
-        <el-form ref="form" :model="form" :rules="rule" label-width="110px" size="mini" style="height: 690px; overflow: auto; scroll:auto;">
+        <el-form ref="form" :model="form" :rules="rule" label-width="130px" size="mini" style="height: 690px; overflow: auto; scroll:auto;">
             <div class="info">
                 <h2>訂單資訊</h2>
                 <div class="list">
@@ -205,6 +205,7 @@ export default {
                 check8:false,//取消修改
             },
             temp:0,
+            count:1,//計算目前是今天第幾筆訂單
             after:"",
             find:"",//搜尋已完成的關鍵字
             url:"/createReports",//預設API
@@ -493,6 +494,7 @@ export default {
             }
         },
         newOrder(){//清空欄位資料＆禁用
+            // console.log("enter");
             this.form= {//先清空上個狀態的欄位資料
             //訂單資訊
 				key:"",
@@ -820,25 +822,6 @@ export default {
             if(res.status==true){
                 alert("訂單儲存成功！");
             }
-
-            //刷新頁面
-            // this.$router.push({
-            //     name: 'PlaceOrder',
-            //     params: {
-            //         role: this.GLOBAL.role,
-            //         user_name: this.GLOBAL.account,
-            //         token: this.GLOBAL.token
-            //     }
-            // });
-
-            // //重新把變數設定回來
-            // this.GLOBAL.setAccount(this.$route.params.user_name);
-            // this.GLOBAL.setToken(this.$route.params.token);
-            // this.GLOBAL.setRole(this.$route.params.role);
-
-            // this.role=this.$route.params.role
-            // this.user_name=this.$route.params.user_name
-
             this.packageGetData();
         },
     },
@@ -866,6 +849,17 @@ export default {
                 this.done=matched;
             }    
         },
+        url: function(){
+            console.log("1111111");
+            //新訂單編號
+            if(this.url==="createReports"){
+                var date = new Date();
+                date = date.toISOString().split('T')[0].replace("-","").replace("-","");
+                var key = date + String(this.count).padStart(3, '0');
+                this.form.key = key;
+                this.count++;
+            }
+        }
     }
 };
 </script>
@@ -957,8 +951,8 @@ h4{
 	text-align: center;
     position: absolute;
     top: 13%;
-	left: 3%;
-    width: 80%;
+	left: 13%;
+    width: 60%;
 }
 
 .info {
