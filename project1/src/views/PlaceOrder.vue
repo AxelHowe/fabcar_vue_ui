@@ -573,9 +573,9 @@ export default {
                 document.getElementById(value).style ="color:rgb(61, 119, 173); cursor:pointer;";
             })
 
-            this.buttonDisabled(state);//處理被禁用的狀態按鈕
-            this.changeAPI(state);//改變每個流程所對應的API路徑
             this.initStatus(state);//更新欄位禁用狀態
+            this.buttonDisabled(state);//處理被禁用的狀態按鈕
+            this.changeAPI(state);//改變每個流程所對應的API路徑        
         },
         initStatus(state) {//點某個狀態按鈕就會到這裡變成禁用
             var arr=[];

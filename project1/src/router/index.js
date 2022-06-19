@@ -10,7 +10,7 @@ import Register from '../views/Register.vue'
 Vue.use(VueRouter)
 const routes = [
     {
-        path: '/placeOrder',
+        path: '/placeorder',
         name: 'PlaceOrder',
         component: PlaceOrder
     },{
