@@ -138,7 +138,7 @@
                 </el-form-item>
             </div>
             <el-form-item class="send">
-                <el-button type="primary" @click="onSubmit()" :disabled="checkDisable.check7">儲存訂單</el-button><!--TODO:顯示歷史狀態時要隱藏-->
+                <el-button type="primary" @click="onSubmit()" :disabled="checkDisable.check7">儲存訂單</el-button>
                 <el-button @click="cancel()" :disabled="checkDisable.check8">取消更改</el-button>
             </el-form-item>
             <div class="checkbox">
@@ -812,18 +812,29 @@ export default {
             }
         },
 		async packagePostData() {//送出訂單
+            const loading = this.$loading({
+                lock: true,
+                text: '訂單儲存中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(255, 255, 255, 0.7)'
+            });
+            console.log(loading);
+
             let params= {
                 username: this.user_name,
                 report: this.form
             }
             this.boolToStr();//checkbox的boolean改string
             const res = await this.$POST(this.url, params);
+
+            //TODO:測試這裡
 			console.log("res: "+res);
             if(res.status==true){
+                loading.close();
                 alert("訂單儲存成功！");
             }
             this.packageGetData();
-        },
+        }
     },
     created() {
         this.packageGetData();
@@ -850,7 +861,6 @@ export default {
             }    
         },
         url: function(){
-            console.log("1111111");
             //新訂單編號
             if(this.url==="createReports"){
                 var date = new Date();
