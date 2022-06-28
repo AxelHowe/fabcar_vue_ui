@@ -13,8 +13,15 @@ Vue.prototype.$PUT = PUT
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 
+//改變網頁title
+router.beforeEach((to,from,next) =>{
+    if(to.meta.title){
+        document.title = to.meta.title
+    }
+    next();
+})
+
 new Vue({
     router,
     render: h => h(App),
-     
 }).$mount('#app')

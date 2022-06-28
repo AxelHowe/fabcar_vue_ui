@@ -1,3 +1,4 @@
+<!-- 1.3-->
 <template>
 <div class="placeorder">
     <div class="banner">
@@ -22,12 +23,10 @@
         <h4 class="greeting">Hello, {{ user_name }}</h4>
         <div class="account">
             <el-dropdown>
-                <el-button type="primary">
-                    我的帳號<i class="el-icon-arrow-down el-icon--right"></i>
-                </el-button>
+                <el-button type="primary">我的帳號<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>所有訂單</el-dropdown-item>
-                    <el-dropdown-item>帳號管理</el-dropdown-item>
+                    <el-dropdown-item @click.native="changePassword">更改密碼</el-dropdown-item>
+                    <el-dropdown-item @click.native="logout">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -153,32 +152,32 @@
         </el-form>
     </div>
     <div class="menu">
-		<el-menu default-active="1" class="el-menu-vertical-demo undone" style="height: 41%; overflow: auto; scroll:auto;">
+		<el-menu default-active="100" class="el-menu-vertical-demo undone" style="height: 41%; overflow:auto; scroll:auto; width:16%;" unique-opened=true>
             <el-submenu index="100">
                 <template slot="title">未完成訂單</template>
                 <!--顯示每一筆訂單 -->
-                <el-submenu :index=String(index) v-for="(item, index) in undone" :key="index">
-                    <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">訂單{{item.key}}</el-button></template>
+                <el-submenu :index=index v-for="(item, index) in undone" :key="index">
+                    <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">{{item.key}}</el-button></template>
                     <!--顯示歷史狀態 -->
-                    <el-timeline style="height: 150px; overflow: auto; scroll:auto;">
-                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
-                            <el-button type="text" @click="showUndoneHistory(history.Report)">{{history.Report.process}}</el-button>
+                    <el-timeline style="height: 165px; overflow: auto; scroll:auto;">
+                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="timestamp.concat(showWhichOne(history.Report.process), history.Report.date)">
+                            <el-button type="text" @click="showUndoneHistory(history.Report)" style="padding: 0px;">{{history.Report.process}}</el-button>
                         </el-timeline-item>
                     </el-timeline>
                 </el-submenu>
             </el-submenu>
         </el-menu>
-        <el-input placeholder="搜尋訂單" prefix-icon="el-icon-search" class="find" clearable v-model="find"></el-input>
-        <el-menu default-active="2" class="el-menu-vertical-demo done" style="height: 45%;">
+        <el-input placeholder="輸入訂單編號" prefix-icon="el-icon-search" class="find" clearable v-model="find" ></el-input>
+        <el-menu default-active="200" class="el-menu-vertical-demo done" style="height: 45%; overflow: auto; scroll:auto; width:16%;" unique-opened=true>
 			<el-submenu index="200">
                 <template slot="title">已完成訂單</template>
                 <!--顯示每一筆訂單 -->
-                <el-submenu :index=String(index) v-for="(item, index) in done" :key="index">
-                    <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">訂單{{item.key}}</el-button></template>
+                <el-submenu :index=index v-for="(item, index) in done" :key="index">
+                    <template slot="title"><el-button type="text" @click="showCurrentHistory(item)">{{item.key}}</el-button></template>
                     <!--顯示歷史狀態 -->
-                    <el-timeline style="height: 150px; overflow: auto; scroll:auto;">
-                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="showWhichOne(history.Report.process)">
-                            <el-button type="text" @click="showDoneHistory(history.Report)">{{history.Report.process}}</el-button>
+                    <el-timeline style="height: 165px; overflow: auto; scroll:auto;">
+                        <el-timeline-item v-for="(history, index) in item.Historys" :key="index" :timestamp="timestamp.concat(showWhichOne(history.Report.process), history.Report.date)">
+                            <el-button type="text" @click="showDoneHistory(history.Report)" style="padding: 0px;">{{history.Report.process}}</el-button>
                         </el-timeline-item>
                     </el-timeline>
                 </el-submenu>
@@ -204,6 +203,7 @@ export default {
                 check7:false,//儲存
                 check8:false,//取消修改
             },
+            timestamp:"",
             temp:0,
             count:1,//計算目前是今天第幾筆訂單
             after:"",
@@ -256,126 +256,488 @@ export default {
                 finish: false,                            
             },
             done:[
-                {
-                    "key": "A1210",
-                    "process": "簽署成功",
-                    "urgent": "無",
-                    "odate": "2022-02-02",
-                    "ddate": "2022-05-05",
-                    "purchase": "Tom",
-                    "sname": "Ed-001",
-                    "supplier": "Thinktek",
-                    "signer": "Larry",
-                    "invoice": "",
-                    "pname": "螺絲",
-                    "pquantity": "100",
-                    "price": "0.5",
-                    "sdate": "2022-03-30",
-                    "amount": "0",
-                    "bad": "",
-                    "bnote": "",
-                    "sbad": "10",
-                    "volume": "110",
-                    "ntraded": "0",
-                    "oestablished": "turn",
-                    "ocargo": "true",
-                    "ccargo": "true",
-                    "bill": "true",
-                    "cbill": "true",
-                    "finish": "",
-                    "note": "無",
-                    "Historys": null
-                },{
-                    "key": "A1111",
-                    "process": "簽署成功",
-                    "urgent": "無",
-                    "odate": "2022-02-02",
-                    "ddate": "2022-05-05",
-                    "purchase": "Tom",
-                    "sname": "Ed-001",
-                    "supplier": "Thinktek",
-                    "signer": "Larry",
-                    "invoice": "",
-                    "pname": "螺絲",
-                    "pquantity": "100",
-                    "price": "0.5",
-                    "sdate": "2022-03-30",
-                    "amount": "0",
-                    "bad": "",
-                    "bnote": "",
-                    "sbad": "10",
-                    "volume": "110",
-                    "ntraded": "0",
-                    "oestablished": "turn",
-                    "ocargo": "true",
-                    "ccargo": "true",
-                    "bill": "true",
-                    "cbill": "true",
-                    "finish": "",
-                    "note": "無",
-                    "Historys": null
-                },{
-                    "key": "A1",
-                    "process": "簽署成功",
-                    "urgent": "無",
-                    "odate": "2022-02-02",
-                    "ddate": "2022-05-05",
-                    "purchase": "Tom",
-                    "sname": "Ed-001",
-                    "supplier": "Thinktek",
-                    "signer": "Larry",
-                    "invoice": "",
-                    "pname": "螺絲",
-                    "pquantity": "100",
-                    "price": "0.5",
-                    "sdate": "2022-03-30",
-                    "amount": "0",
-                    "bad": "",
-                    "bnote": "",
-                    "sbad": "10",
-                    "volume": "110",
-                    "ntraded": "0",
-                    "oestablished": "turn",
-                    "ocargo": "true",
-                    "ccargo": "true",
-                    "bill": "true",
-                    "cbill": "true",
-                    "finish": "",
-                    "note": "無",
-                    "Historys": null
-                },
+                // {
+                //     "key": "A0",
+                //     "process": "簽署成功",
+                //     "urgent": "無",
+                //     "odate": "2022-02-02",
+                //     "ddate": "2022-05-05",
+                //     "purchase": "Tom",
+                //     "sname": "Ed-001",
+                //     "supplier": "Thinktek",
+                //     "signer": "Larry",
+                //     "invoice": "",
+                //     "pname": "螺絲",
+                //     "pquantity": "100",
+                //     "price": "0.5",
+                //     "sdate": "2022-03-30",
+                //     "amount": "0",
+                //     "bad": "",
+                //     "bnote": "",
+                //     "sbad": "10",
+                //     "volume": "110",
+                //     "ntraded": "0",
+                //     "oestablished": "turn",
+                //     "ocargo": "true",
+                //     "ccargo": "true",
+                //     "bill": "true",
+                //     "cbill": "true",
+                //     "finish": "",
+                //     "note": "無",
+                //     "Historys": null
+                // },{
+                //     "key": "A66",
+                //     "process": "簽署成功",
+                //     "urgent": "1s",
+                //     "odate": "1d",
+                //     "ddate": "1b",
+                //     "purchase": "1e",
+                //     "sname": "1",
+                //     "supplier": "1",
+                //     "signer": "mamaya",
+                //     "invoice": "",
+                //     "pname": "1",
+                //     "pquantity": "1",
+                //     "price": "1",
+                //     "sdate": "",
+                //     "amount": "",
+                //     "bad": "",
+                //     "bnote": "",
+                //     "sbad": "",
+                //     "volume": "",
+                //     "ntraded": "",
+                //     "oestablished": "1",
+                //     "ocargo": "",
+                //     "ccargo": "",
+                //     "bill": "",
+                //     "cbill": "",
+                //     "finish": "",
+                //     "note": "1",
+                //     "Historys": 
+                //     [
+                //         {
+                //             "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                //             "Report": {
+                //                 "key": "",
+                //                 "process": "mmmm",
+                //                 "urgent": "1s",
+                //                 "odate": "1d",
+                //                 "ddate": "1b",
+                //                 "purchase": "1e",
+                //                 "sname": "1",
+                //                 "supplier": "1",
+                //                 "signer": "",
+                //                 "invoice": "",
+                //                 "pname": "1",
+                //                 "pquantity": "1",
+                //                 "price": "1",
+                //                 "sdate": "",
+                //                 "amount": "",
+                //                 "sbad": "",
+                //                 "volume": "",
+                //                 "ntraded": "",
+                //                 "oestablished": "",
+                //                 "ocargo": "",
+                //                 "ccargo": "",
+                //                 "bill": "",
+                //                 "cbill": "",
+                //                 "finish": "",
+                //                 "note": "1",
+                //                 "Historys": null
+                //             }
+                //         },{
+                //             "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                //             "Report": {
+                //                 "key": "",
+                //                 "process": "mmmm",
+                //                 "urgent": "1s",
+                //                 "odate": "1d",
+                //                 "ddate": "1b",
+                //                 "purchase": "1e",
+                //                 "sname": "1",
+                //                 "supplier": "1",
+                //                 "signer": "",
+                //                 "invoice": "",
+                //                 "pname": "1",
+                //                 "pquantity": "1",
+                //                 "price": "1",
+                //                 "sdate": "",
+                //                 "amount": "",
+                //                 "sbad": "",
+                //                 "volume": "",
+                //                 "ntraded": "",
+                //                 "oestablished": "",
+                //                 "ocargo": "",
+                //                 "ccargo": "",
+                //                 "bill": "",
+                //                 "cbill": "",
+                //                 "finish": "",
+                //                 "note": "1",
+                //                 "Historys": null
+                //             }
+                //         },
+                //     ]
+                // }
             ],//已完成訂單
             undone:[
-                {
-                    "key": "A0",
-                    "process": "簽署成功",
-                    "urgent": "無",
-                    "odate": "2022-02-02",
-                    "ddate": "2022-05-05",
-                    "purchase": "Tom",
-                    "sname": "Ed-001",
-                    "supplier": "Thinktek",
-                    "signer": "Larry",
-                    "invoice": "",
-                    "pname": "螺絲",
-                    "pquantity": "100",
-                    "price": "0.5",
-                    "sdate": "2022-03-30",
-                    "amount": "0",
-                    "bad": "",
-                    "bnote": "",
-                    "sbad": "10",
-                    "volume": "110",
-                    "ntraded": "0",
-                    "oestablished": "turn",
-                    "ocargo": "true",
-                    "ccargo": "true",
-                    "bill": "true",
-                    "cbill": "true",
-                    "finish": "",
-                    "note": "無",
-                    "Historys": null
-                }
+            //     {
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": 
+            //         [
+            //             {
+            //                 "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+            //                 "Report": {
+            //                     "key": "",
+            //                     "process": "發包中",
+            //                     "urgent": "1s",
+            //                     "odate": "1d",
+            //                     "ddate": "1b",
+            //                     "purchase": "1e",
+            //                     "sname": "1",
+            //                     "supplier": "1",
+            //                     "signer": "",
+            //                     "invoice": "",
+            //                     "pname": "1",
+            //                     "pquantity": "1",
+            //                     "price": "1",
+            //                     "sdate": "",
+            //                     "amount": "",
+            //                     "sbad": "",
+            //                     "volume": "",
+            //                     "ntraded": "",
+            //                     "oestablished": "",
+            //                     "ocargo": "",
+            //                     "ccargo": "",
+            //                     "bill": "",
+            //                     "cbill": "",
+            //                     "finish": "",
+            //                     "note": "1",
+            //                     "date":"2022/08/22",
+            //                     "Historys": null
+            //                 }
+            //             },{
+            //                 "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+            //                 "Report": {
+            //                     "key": "",
+            //                     "process": "簽署成功",
+            //                     "urgent": "1s",
+            //                     "odate": "1d",
+            //                     "ddate": "1b",
+            //                     "purchase": "1e",
+            //                     "sname": "1",
+            //                     "supplier": "1",
+            //                     "signer": "",
+            //                     "invoice": "",
+            //                     "pname": "1",
+            //                     "pquantity": "1",
+            //                     "price": "1",
+            //                     "sdate": "",
+            //                     "amount": "",
+            //                     "sbad": "",
+            //                     "volume": "",
+            //                     "ntraded": "",
+            //                     "oestablished": "",
+            //                     "ocargo": "",
+            //                     "ccargo": "",
+            //                     "bill": "",
+            //                     "cbill": "",
+            //                     "finish": "",
+            //                     "note": "1",
+            //                     "date":"2012/03/24",
+            //                     "Historys": null
+            //                 }
+            //             },{
+            //                 "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+            //                 "Report": {
+            //                     "key": "",
+            //                     "process": "發票開立",
+            //                     "urgent": "1s",
+            //                     "odate": "1d",
+            //                     "ddate": "1b",
+            //                     "purchase": "1e",
+            //                     "sname": "1",
+            //                     "supplier": "1",
+            //                     "signer": "",
+            //                     "invoice": "",
+            //                     "pname": "1",
+            //                     "pquantity": "1",
+            //                     "price": "1",
+            //                     "sdate": "",
+            //                     "amount": "",
+            //                     "sbad": "",
+            //                     "volume": "",
+            //                     "ntraded": "",
+            //                     "oestablished": "",
+            //                     "ocargo": "",
+            //                     "ccargo": "",
+            //                     "bill": "",
+            //                     "cbill": "",
+            //                     "finish": "",
+            //                     "note": "1",
+            //                     "date":"2022/08/22",
+            //                     "Historys": null
+            //                 }
+            //             },
+            //         ]
+            //     },{
+            //         "key": "A1111",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     },{
+            //         "key": "A1210",
+            //         "process": "簽署成功",
+            //         "urgent": "無",
+            //         "odate": "2022-02-02",
+            //         "ddate": "2022-05-05",
+            //         "purchase": "Tom",
+            //         "sname": "Ed-001",
+            //         "supplier": "Thinktek",
+            //         "signer": "Larry",
+            //         "invoice": "",
+            //         "pname": "螺絲",
+            //         "pquantity": "100",
+            //         "price": "0.5",
+            //         "sdate": "2022-03-30",
+            //         "amount": "0",
+            //         "bad": "",
+            //         "bnote": "",
+            //         "sbad": "10",
+            //         "volume": "110",
+            //         "ntraded": "0",
+            //         "oestablished": "turn",
+            //         "ocargo": "true",
+            //         "ccargo": "true",
+            //         "bill": "true",
+            //         "cbill": "true",
+            //         "finish": "",
+            //         "note": "無",
+            //         "Historys": null
+            //     }
             ],//未完成訂單
         };
     },
@@ -384,18 +746,16 @@ export default {
             var str="";
             if(!data){
                 console.log(data);
-                str="中心廠";
+                str="中心廠 ";
             }else if(data==="發包中" || data==="簽署成功" || data==="驗貨中" || data==="確認交貨完成"){
-                str="供應商";
+                str="供應商 ";
             }else if(data==="交貨中" || data==="交貨完成" || data==="發票開立"){
-                str="中心廠";
+                str="中心廠 ";
             }
             return str;
         },
         showCurrentHistory(data){//判斷目前的訂單進度，決定要禁用哪些button
-            // this.changeStatus(0);
             this.form=data;
-            // console.log(this.form.process);
             var state=0;
             if(data.process=="發包中"){
                 state=1;
@@ -414,14 +774,15 @@ export default {
             }
             this.changeStatus(state);//改變最後訂單的進度
         },
-        showUndoneHistory(data){//顯示未完成訂單（index代表哪筆訂單，id代表哪個歷史狀態）
+        showUndoneHistory(data){//顯示未完成訂單
             this.form=data;
-            var arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","b1","b2","b3","b4","c1","c2","c3","d1","d2","e1","e2","e3","e4","e5","e6"];
+            var arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","a13","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
             arr.forEach(function(value){
                 document.getElementById(value).disabled = true;
                 document.getElementById(value).style ="background-color: #e6ecf5";
             });
-            this.buttonDisabled(10);
+            this.rule={};
+            // this.buttonDisabled(10);
             this.checkDisable.check1=false;
             this.checkDisable.check2=false;
             this.checkDisable.check3=false;
@@ -433,12 +794,12 @@ export default {
         },
         showDoneHistory(data){//顯示已完成訂單
             this.form=data;
-            var arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","b1","b2","b3","b4","c1","c2","c3","d1","d2","d3","e1","e2","e3","e4","e5","e6"];
+            var arr=["a1","a2","a3","a4","a5","a6","a7","a8","a9","a10","a11","a12","a13","b1","b2","b3","c1","c2","c3","c4","e1","e2","e3","e4","e5","e6","f1","f2","f3"];
             arr.forEach(function(value){
                 document.getElementById(value).disabled = true;
                 document.getElementById(value).style ="background-color: #e6ecf5";
             });
-            this.buttonDisabled(10);
+            this.rule={};
             this.checkDisable.check1=false;
             this.checkDisable.check2=false;
             this.checkDisable.check3=false;
@@ -575,7 +936,7 @@ export default {
 
             this.initStatus(state);//更新欄位禁用狀態
             this.buttonDisabled(state);//處理被禁用的狀態按鈕
-            this.changeAPI(state);//改變每個流程所對應的API路徑        
+            this.changeAPI(state);//改變每個流程所對應的API路徑 
         },
         initStatus(state) {//點某個狀態按鈕就會到這裡變成禁用
             var arr=[];
@@ -748,6 +1109,15 @@ export default {
                 alert("修改已取消");
             }
         },
+        changePassword(){//更改密碼
+            this.$router.push({path:'/change'});
+        },
+        logout(){//登出
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            this.$router.push({path:'/'});
+        },
         verifyForm(){
             if(this.state===1){//新增訂單
                 if(!this.form.key || !this.form.urgent || !this.form.odate || !this.form.ddate || !this.form.purchase || !this.form.sname || !this.form.supplier || !this.form.pname || !this.form.pquantity || !this.form.price || !this.form.note){
@@ -801,9 +1171,15 @@ export default {
             console.log(res);
 
             //區分出已完成/未完成訂單
-            for(let i in res.report){
-                console.log(i);
+            for(let i in res.report){//res.report
                 this.strToBool(res.report[i]);//checkbox的string改boolean
+
+                let key=res.report[i].key;
+                if(res.report[i].Historys){//如果有歷史狀態
+                    for(let j in res.report[i].Historys){
+                        res.report[i].Historys[j].Report.key=key;
+                    }
+                }
                 if(res.report[i].finish===true){
                     this.done.push(res.report[i]);//已完成訂單
                 }else{
@@ -917,7 +1293,7 @@ export default {
 
 .find{
 	min-height: 0px;
-    width: 12%;
+    width: 16%;
     position: fixed;
     top: 50%;
 }
@@ -969,7 +1345,7 @@ h4{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     padding: 5px;
 	position: fixed;
-	left: 17%;
+	left: 19%;
 	top: 9%;
     width: 50%;
 }
@@ -994,7 +1370,7 @@ h4{
     padding: 5px;
 	width: 20%;
 	position: fixed;
-	left: 70%;
+	left: 72%;
 	top: 9%;
 }
 
@@ -1003,7 +1379,7 @@ h4{
     padding: 5px;
 	width: 20%;
 	position: fixed;
-	left: 70%;
+	left: 72%;
 	top: 35%;
 }
 
@@ -1012,16 +1388,16 @@ h4{
     padding: 5px;
 	width: 20%;
 	position: fixed;
-	left: 70%;
+	left: 72%;
 	top: 67%;
 }
 
 .invoice{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     padding: 5px;
-	width: 20%;
+	width: 24%;
 	position: fixed;
-	left: 17%;
+	left: 19%;
 	top: 70%;
 }
 
@@ -1053,7 +1429,8 @@ h4{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 	position: fixed;
 	top: 70%;
-	left: 45.5%;
+	left: 45%;
+    width: 24%;
 }
 
 .el-breadcrumb {
