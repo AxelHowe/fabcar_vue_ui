@@ -75,7 +75,8 @@
                         <el-input v-model="form.price" id="a12"></el-input>
                     </el-form-item>               
                     <el-form-item label="總金額">
-                        <span>{{this.form.price * this.form.pquantity}}</span>
+                        <el-input v-model="total" disabled></el-input>
+                        <!-- <span>{{this.form.price * this.form.pquantity}}</span> -->
                     </el-form-item>
                     <el-form-item label="備註" prop="note">
                         <el-input type='textarea' rows=11 show-word-limit v-model="form.note" id="a13"></el-input>
@@ -112,16 +113,16 @@
             <div class="deliverInfo">
                 <h2>交易資訊</h2>
                 <el-form-item label="已交貨總數">
-                    <span>{{this.form.cvolume - this.form.sbad}}</span>
+                    <el-input v-model="received" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="已驗貨總數">
-                    <span>{{this.form.cvolume}}</span>
+                    <el-input v-model="form.cvolume" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="不良品總數">
-                    <span>{{this.form.sbad}}</span>
+                    <el-input v-model="form.sbad" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="未交貨總數">
-                    <span>{{this.form.pquantity - (this.form.cvolume - this.form.sbad)}}</span>
+                    <el-input v-model="unreceived" disabled></el-input>
                 </el-form-item>
             </div>
             <div class="invoice">
@@ -203,6 +204,7 @@ export default {
                 check7:false,//儲存
                 check8:false,//取消修改
             },
+            // total:"",
             timestamp:"",
             temp:0,
             count:1,//計算目前是今天第幾筆訂單
@@ -229,6 +231,7 @@ export default {
                 pquantity: "",
                 price: "",
                 note: "",
+                total: "",//this.form.price * this.form.pquantity,
             //交貨單
                 sdate: "",
                 amount: "",
@@ -253,131 +256,132 @@ export default {
                 ccargo: false,
                 bill: false,
                 cbill: false,
-                finish: false,                            
+                finish: false,  
+
             },
             done:[
-                // {
-                //     "key": "A0",
-                //     "process": "簽署成功",
-                //     "urgent": "無",
-                //     "odate": "2022-02-02",
-                //     "ddate": "2022-05-05",
-                //     "purchase": "Tom",
-                //     "sname": "Ed-001",
-                //     "supplier": "Thinktek",
-                //     "signer": "Larry",
-                //     "invoice": "",
-                //     "pname": "螺絲",
-                //     "pquantity": "100",
-                //     "price": "0.5",
-                //     "sdate": "2022-03-30",
-                //     "amount": "0",
-                //     "bad": "",
-                //     "bnote": "",
-                //     "sbad": "10",
-                //     "volume": "110",
-                //     "ntraded": "0",
-                //     "oestablished": "turn",
-                //     "ocargo": "true",
-                //     "ccargo": "true",
-                //     "bill": "true",
-                //     "cbill": "true",
-                //     "finish": "",
-                //     "note": "無",
-                //     "Historys": null
-                // },{
-                //     "key": "A66",
-                //     "process": "簽署成功",
-                //     "urgent": "1s",
-                //     "odate": "1d",
-                //     "ddate": "1b",
-                //     "purchase": "1e",
-                //     "sname": "1",
-                //     "supplier": "1",
-                //     "signer": "mamaya",
-                //     "invoice": "",
-                //     "pname": "1",
-                //     "pquantity": "1",
-                //     "price": "1",
-                //     "sdate": "",
-                //     "amount": "",
-                //     "bad": "",
-                //     "bnote": "",
-                //     "sbad": "",
-                //     "volume": "",
-                //     "ntraded": "",
-                //     "oestablished": "1",
-                //     "ocargo": "",
-                //     "ccargo": "",
-                //     "bill": "",
-                //     "cbill": "",
-                //     "finish": "",
-                //     "note": "1",
-                //     "Historys": 
-                //     [
-                //         {
-                //             "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
-                //             "Report": {
-                //                 "key": "",
-                //                 "process": "mmmm",
-                //                 "urgent": "1s",
-                //                 "odate": "1d",
-                //                 "ddate": "1b",
-                //                 "purchase": "1e",
-                //                 "sname": "1",
-                //                 "supplier": "1",
-                //                 "signer": "",
-                //                 "invoice": "",
-                //                 "pname": "1",
-                //                 "pquantity": "1",
-                //                 "price": "1",
-                //                 "sdate": "",
-                //                 "amount": "",
-                //                 "sbad": "",
-                //                 "volume": "",
-                //                 "ntraded": "",
-                //                 "oestablished": "",
-                //                 "ocargo": "",
-                //                 "ccargo": "",
-                //                 "bill": "",
-                //                 "cbill": "",
-                //                 "finish": "",
-                //                 "note": "1",
-                //                 "Historys": null
-                //             }
-                //         },{
-                //             "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
-                //             "Report": {
-                //                 "key": "",
-                //                 "process": "mmmm",
-                //                 "urgent": "1s",
-                //                 "odate": "1d",
-                //                 "ddate": "1b",
-                //                 "purchase": "1e",
-                //                 "sname": "1",
-                //                 "supplier": "1",
-                //                 "signer": "",
-                //                 "invoice": "",
-                //                 "pname": "1",
-                //                 "pquantity": "1",
-                //                 "price": "1",
-                //                 "sdate": "",
-                //                 "amount": "",
-                //                 "sbad": "",
-                //                 "volume": "",
-                //                 "ntraded": "",
-                //                 "oestablished": "",
-                //                 "ocargo": "",
-                //                 "ccargo": "",
-                //                 "bill": "",
-                //                 "cbill": "",
-                //                 "finish": "",
-                //                 "note": "1",
-                //                 "Historys": null
-                //             }
-                //         },
-                //     ]
-                // }
+                {
+                    "key": "A0",
+                    "process": "簽署成功",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": "turn",
+                    "ocargo": "true",
+                    "ccargo": "true",
+                    "bill": "true",
+                    "cbill": "true",
+                    "finish": "",
+                    "note": "無",
+                    "Historys": null
+                },{
+                    "key": "A66",
+                    "process": "簽署成功",
+                    "urgent": "1s",
+                    "odate": "1d",
+                    "ddate": "1b",
+                    "purchase": "1e",
+                    "sname": "1",
+                    "supplier": "1",
+                    "signer": "mamaya",
+                    "invoice": "",
+                    "pname": "1",
+                    "pquantity": "1",
+                    "price": "1",
+                    "sdate": "",
+                    "amount": "",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "",
+                    "volume": "",
+                    "ntraded": "",
+                    "oestablished": "1",
+                    "ocargo": "",
+                    "ccargo": "",
+                    "bill": "",
+                    "cbill": "",
+                    "finish": "",
+                    "note": "1",
+                    "Historys": 
+                    [
+                        {
+                            "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                            "Report": {
+                                "key": "",
+                                "process": "mmmm",
+                                "urgent": "1s",
+                                "odate": "1d",
+                                "ddate": "1b",
+                                "purchase": "1e",
+                                "sname": "1",
+                                "supplier": "1",
+                                "signer": "",
+                                "invoice": "",
+                                "pname": "1",
+                                "pquantity": "1",
+                                "price": "1",
+                                "sdate": "",
+                                "amount": "",
+                                "sbad": "",
+                                "volume": "",
+                                "ntraded": "",
+                                "oestablished": "",
+                                "ocargo": "",
+                                "ccargo": "",
+                                "bill": "",
+                                "cbill": "",
+                                "finish": "",
+                                "note": "1",
+                                "Historys": null
+                            }
+                        },{
+                            "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                            "Report": {
+                                "key": "",
+                                "process": "mmmm",
+                                "urgent": "1s",
+                                "odate": "1d",
+                                "ddate": "1b",
+                                "purchase": "1e",
+                                "sname": "1",
+                                "supplier": "1",
+                                "signer": "",
+                                "invoice": "",
+                                "pname": "1",
+                                "pquantity": "1",
+                                "price": "1",
+                                "sdate": "",
+                                "amount": "",
+                                "sbad": "",
+                                "volume": "",
+                                "ntraded": "",
+                                "oestablished": "",
+                                "ocargo": "",
+                                "ccargo": "",
+                                "bill": "",
+                                "cbill": "",
+                                "finish": "",
+                                "note": "1",
+                                "Historys": null
+                            }
+                        },
+                    ]
+                }
             ],//已完成訂單
             undone:[
             //     {
@@ -1158,8 +1162,8 @@ export default {
 			this.packagePostData();
 		},
         async packageGetData() {//導入訂單畫面的時候，會傳入所有訂單資料跟狀態 
-            this.done=[];
-            this.undone=[];
+            // this.done=[];
+            // this.undone=[];
             
             const url = "reports";
             const params= {
@@ -1218,7 +1222,18 @@ export default {
     mounted(){
         this.selectRole();
     },
-    watch:{//監聽搜尋欄位
+    computed: {
+        total: function(){
+            return this.form.price * this.form.pquantity;
+        },
+        received: function(){
+            return this.form.cvolume - this.form.sbad;
+        },
+        unreceived: function(){
+            return this.form.pquantity - (this.form.cvolume - this.form.sbad);
+        }
+    },
+    watch: {//監聽搜尋欄位
         find: function(){           
             if(this.temp===0){//第一次進來這個函式
                 this.after=this.done;//把原始資料存在temp裡
@@ -1277,6 +1292,7 @@ export default {
 .el-button:hover{
     cursor:pointer;
 }
+
 .done{
 	min-height: 0px;
     width: 12%;
@@ -1458,5 +1474,9 @@ h4{
 
 .el-input >>> .el-input__inner {
 	background-color: transparent;
+}
+
+.el-input.is-disabled >>> .el-input__inner{
+    color: #6197cd;
 }
 </style>
