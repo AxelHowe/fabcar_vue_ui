@@ -189,7 +189,7 @@
 </div>
 </template>
 
-<script>
+<script>ㄒ
 export default {
     name: "placeorder",
     data() {
@@ -1205,14 +1205,21 @@ export default {
                 username: this.user_name,
                 report: this.form
             }
+
             this.boolToStr();//checkbox的boolean改string
+            res.volume=String(res.volume)
+            res.cvolume=String(res.cvolume)
+            res.sbad=String(res.sbad)
+            res.ntraded=String(res.ntraded)
             const res = await this.$POST(this.url, params);
 
 			console.log("res: "+res);
             loading.close();
             if(res.status==true){
+                loading.close();
                 alert("訂單儲存成功！");
             }else{
+                loading.close();
                 alert("錯誤訊息"+res.message);
             }
             this.packageGetData();
