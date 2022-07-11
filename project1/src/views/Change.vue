@@ -25,7 +25,7 @@ export default {
         };
     },
     methods:{
-        submit(){//TODO:要看後端怎麼處理這邊
+        submit(){
             const url = "register";
             const params = this.form;
             let res = this.$POST(url, params);

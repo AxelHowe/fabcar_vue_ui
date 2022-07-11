@@ -168,7 +168,7 @@
                 </el-submenu>
             </el-submenu>
         </el-menu>
-        <el-input placeholder="輸入訂單編號" prefix-icon="el-icon-search" class="find" clearable v-model="find" ></el-input>
+        <el-input placeholder="輸入訂單編號" prefix-icon="el-icon-search" class="find" clearable v-model="find"></el-input>
         <el-menu default-active="200" class="el-menu-vertical-demo done" style="height: 45%; overflow: auto; scroll:auto; width:16%;" unique-opened=true>
 			<el-submenu index="200">
                 <template slot="title">已完成訂單</template>
@@ -1208,11 +1208,12 @@ export default {
             this.boolToStr();//checkbox的boolean改string
             const res = await this.$POST(this.url, params);
 
-            //TODO:測試這裡
 			console.log("res: "+res);
+            loading.close();
             if(res.status==true){
-                loading.close();
                 alert("訂單儲存成功！");
+            }else{
+                alert("錯誤訊息"+res.message);
             }
             this.packageGetData();
         }
