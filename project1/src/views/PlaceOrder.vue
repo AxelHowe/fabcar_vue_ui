@@ -189,7 +189,7 @@
 </div>
 </template>
 
-<script>ㄒ
+<script>
 export default {
     name: "placeorder",
     data() {
@@ -215,49 +215,6 @@ export default {
             role: localStorage.getItem('role'),
             user_name: localStorage.getItem('username'),
             rule:{},//表單驗證規則
-            form: {//顯示在欄位上的資料
-            //訂單資訊
-				key:"",
-                process:"",
-                urgent:"",
-                odate:"",
-                ddate:"",
-                purchase:"",
-                sname: "",
-                supplier:"",
-                signer: "",            
-                pname:"",
-                pquantity: "",
-                price: "",
-                note: "",
-                total: "",//this.form.price * this.form.pquantity,
-            //交貨單
-                sdate: "",
-                amount: "",
-                snote:"",
-            //驗貨單
-                bdate: "",
-                c_amount: "",
-                bad: "",
-                bnote: "",
-            //發票資訊
-                idate: "",
-                invoice:"",
-                inote: "",
-            //交易資訊
-                volume: 0,
-                cvolume: 0,
-                sbad: 0,
-                ntraded: 0,
-            //訂單狀態
-                oestablished: false,
-                ocargo: false,
-                ccargo: false,
-                bill: false,
-                cbill: false,
-                finish: false,  
-
-            },
             done:[
             //     {
             //         "key": "A0",
@@ -820,6 +777,11 @@ export default {
             this.form.bill = String(this.form.bill);
             this.form.cbill = String(this.form.cbill);
             this.form.finish = String(this.form.finish);
+
+            this.form.volume=String(this.form.volume);
+            this.form.cvolume=String(this.form.cvolume);
+            this.form.sbad=String(this.form.sbad);
+            this.form.ntraded=String(this.form.ntraded);
         },
         strToBool(data){//checkbox的字串轉布林
             if(data.oestablished==="true"){
@@ -1201,19 +1163,14 @@ export default {
             });
             console.log(loading);
 
+            this.boolToStr();//checkbox的boolean改string
             let params= {
                 username: this.user_name,
                 report: this.form
             }
-
-            this.boolToStr();//checkbox的boolean改string
-            res.volume=String(res.volume)
-            res.cvolume=String(res.cvolume)
-            res.sbad=String(res.sbad)
-            res.ntraded=String(res.ntraded)
             const res = await this.$POST(this.url, params);
 
-			console.log("res: "+res);
+			// console.log("res: "+res);
             loading.close();
             if(res.status==true){
                 loading.close();
@@ -1332,30 +1289,7 @@ h2{
     margin: 0px;
 }
 
-h4{
-    position: fixed;
-	left: 80%;
-}
 
-.new_butt{
-    position: absolute;
-    top: 15%;
-    left: 1%;
-    cursor:pointer;
-}
-
-.banner{
-    position: fixed;
-    top: 0%;
-    width: 100%;
-    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1);
-    height: 60px;
-}
-
-.el-dropdown{
-    position: fixed;
-    top: 1%;
-}
 
 .progress {
 	padding: 5px;

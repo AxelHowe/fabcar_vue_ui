@@ -42,9 +42,9 @@ export default {
             console.log(res);
             console.log(res.reports);
 
-            this.GLOBAL.setAccount(this.form.username);
-            this.GLOBAL.setToken(res.token);
-            this.GLOBAL.setRole(res.role);
+            localStorage.setItem('username',this.form.username);
+            localStorage.setItem('token',res.token);
+            localStorage.setItem('role',res.role);
             this.$router.push({path:'/placeOrder'});
         },
     }
