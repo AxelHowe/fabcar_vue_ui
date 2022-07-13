@@ -1173,10 +1173,8 @@ export default {
 			// console.log("res: "+res);
             loading.close();
             if(res.status==true){
-                loading.close();
                 alert("訂單儲存成功！");
             }else{
-                loading.close();
                 alert("錯誤訊息"+res.message);
             }
             this.packageGetData();
