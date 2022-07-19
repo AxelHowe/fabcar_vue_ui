@@ -26,6 +26,7 @@
                 <el-button type="primary">我的帳號<i class="el-icon-arrow-down el-icon--right"></i></el-button>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="changePassword">更改密碼</el-dropdown-item>
+                    <el-dropdown-item @click.native="permission">權限管理</el-dropdown-item>
                     <el-dropdown-item @click.native="logout">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -264,6 +265,9 @@ export default {
         };
     },
     methods: {
+        permission(){
+            this.$router.push({path:'/account'});
+        },
         showWhichOne(data){//判斷顯示在歷史狀態下的使用者
             var str="";
             if(!data){
@@ -382,7 +386,6 @@ export default {
             }
         },
         newOrder(){//清空欄位資料＆禁用
-            // console.log("enter");
             this.form= {//先清空上個狀態的欄位資料
             //訂單資訊
 				key:"",
@@ -637,7 +640,7 @@ export default {
             }
         },
         changePassword(){//更改密碼
-            this.$router.push({path:'/change'});
+            
         },
         logout(){//登出
             localStorage.removeItem('username');
@@ -847,13 +850,20 @@ h2{
     margin: 0px;
 }
 
-
+h4{
+    text-align: center;
+    position: absolute;
+    top: 2%;
+	left: 80%;
+    padding: 10px;
+    margin: 0px;
+}
 
 .progress {
 	padding: 5px;
 	text-align: center;
     position: absolute;
-    top: 13%;
+    top: 1%;
 	left: 13%;
     width: 60%;
 }
@@ -933,7 +943,7 @@ h2{
 
 .account {
 	position: fixed;
-	top: 6%;
+	top: 2%;
 	left: 91%;
 }
 
@@ -955,14 +965,12 @@ h2{
 	top: 15%;
 	left: 5%;
 }
-
 .el-form {
 
 	position: fixed;
 	top: 35%;
 	left: 25%;
 }
-
 .send {
 	position: fixed;
 	top: 90%;

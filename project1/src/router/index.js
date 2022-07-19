@@ -7,6 +7,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Change from '../views/Change.vue'
+import Account from '../views/Account.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -39,6 +40,11 @@ const routes = [
         path: '/change',
         name: 'Change',
         component: Change,
+        meta:{title:"1.3"}
+    },{
+        path: '/account',
+        name: 'Account',
+        component: Account,
         meta:{title:"1.3"}
     }
 ]
