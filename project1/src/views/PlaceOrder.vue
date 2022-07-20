@@ -208,6 +208,7 @@ export default {
             timestamp:"",
             temp:0,
             count:1,//計算目前是今天第幾筆訂單
+            key: "",
             after:"",
             find:"",//搜尋已完成的關鍵字
             url:"/createReports",//預設API
@@ -261,7 +262,102 @@ export default {
             done:[
             ],//已完成訂單
             undone:[
-            ],//未完成訂單
+                {
+                    "key": "A1210",
+                    "process": "發包中",
+                    "urgent": "無",
+                    "odate": "2022-02-02",
+                    "ddate": "2022-05-05",
+                    "purchase": "Tom",
+                    "sname": "Ed-001",
+                    "supplier": "Thinktek",
+                    "signer": "Larry",
+                    "invoice": "",
+                    "pname": "螺絲",
+                    "pquantity": "100",
+                    "price": "0.5",
+                    "sdate": "2022-03-30",
+                    "amount": "0",
+                    "bad": "",
+                    "bnote": "",
+                    "sbad": "10",
+                    "volume": "110",
+                    "ntraded": "0",
+                    "oestablished": true,
+                    "ocargo": true,
+                    "ccargo": true,
+                    "bill": true,
+                    "cbill": true,
+                    "finish": "",
+                    "note": "無",
+                    "Historys": 
+                    [
+                        {
+                            "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                            "Report": {
+                                "key": "",
+                                "process": "發包中",
+                                "urgent": "1s",
+                                "odate": "1d",
+                                "ddate": "1b",
+                                "purchase": "1e",
+                                "sname": "1",
+                                "supplier": "1",
+                                "signer": "",
+                                "invoice": "",
+                                "pname": "1",
+                                "pquantity": "1",
+                                "price": "1",
+                                "sdate": "",
+                                "amount": "",
+                                "sbad": "",
+                                "volume": "",
+                                "ntraded": "",
+                                "oestablished": "",
+                                "ocargo": "",
+                                "ccargo": "",
+                                "bill": "",
+                                "cbill": "",
+                                "finish": "",
+                                "note": "1",
+                                "date":"2022/08/22",
+                                "Historys": null
+                            }
+                        },{
+                            "TxId": "15bf8b6cefd266c24348a4dc7db2e6682cc7783be9f5467cff03961c111fa6a4",
+                            "Report": {
+                                "key": "",
+                                "process": "簽署成功",
+                                "urgent": "1s",
+                                "odate": "1d",
+                                "ddate": "1b",
+                                "purchase": "1e",
+                                "sname": "1",
+                                "supplier": "1",
+                                "signer": "",
+                                "invoice": "",
+                                "pname": "1",
+                                "pquantity": "1",
+                                "price": "1",
+                                "sdate": "",
+                                "amount": "",
+                                "sbad": "",
+                                "volume": "",
+                                "ntraded": "",
+                                "oestablished": "",
+                                "ocargo": "",
+                                "ccargo": "",
+                                "bill": "",
+                                "cbill": "",
+                                "finish": "",
+                                "note": "1",
+                                "date":"2012/03/24",
+                                "Historys": null
+                            }
+                        }
+                    ]
+                }//未完成訂單
+            ]
         };
     },
     methods: {
@@ -429,6 +525,7 @@ export default {
             };
             this.changeStatus(0);//先清空欄位禁用
             this.url = "createReports";
+            this.form.key=this.key;
         },
         selectRole(){//因應使用者身份改變按鈕的禁用狀態
             var arr=[];
@@ -461,7 +558,7 @@ export default {
             var but_init=["1","2","3","4","5","6","7","8"];
             but_init.forEach(function(value){
                 document.getElementById(value).disabled = false;
-                document.getElementById(value).style ="color:rgb(61, 119, 173); cursor:pointer;";
+                document.getElementById(value).style = "color:rgb(61, 119, 173); cursor:pointer;";
             })
 
             this.initStatus(state);//更新欄位禁用狀態
@@ -688,8 +785,8 @@ export default {
 			this.packagePostData();
 		},
         async packageGetData() {//導入訂單畫面的時候，會傳入所有訂單資料跟狀態 
-            this.done=[];
-            this.undone=[];
+            // this.done=[];
+            // this.undone=[];
             
             const url = "reports";
             const params= {
@@ -734,6 +831,10 @@ export default {
             }
             const res = await this.$POST(this.url, params);
 
+            if(this.key===this.form.key){
+                this.count++;
+            }
+
             loading.close();
             if(res.status==true){
                 alert("訂單儲存成功！");
@@ -741,10 +842,17 @@ export default {
                 alert("錯誤訊息"+res.message);
             }
             this.packageGetData();
+        },
+        createNumber(){
+            var date = new Date();
+            date = date.toISOString().split('T')[0].replace("-","").replace("-","");
+            var key = date + String(this.count).padStart(3, '0');
+            this.key = key;
         }
     },
     created() {
         this.packageGetData();
+        this.createNumber();
     },
     mounted(){
         this.selectRole();
@@ -776,18 +884,18 @@ export default {
                     }
                 }
                 this.done=matched;
-            }    
-        },
-        url: function(){
-            //新訂單編號
-            if(this.url==="createReports"){
-                var date = new Date();
-                date = date.toISOString().split('T')[0].replace("-","").replace("-","");
-                var key = date + String(this.count).padStart(3, '0');
-                this.form.key = key;
-                this.count++;
             }
         }
+        // url: function(){
+        //     //新訂單編號
+        //     if(this.url==="createReports"){
+        //         var date = new Date();
+        //         date = date.toISOString().split('T')[0].replace("-","").replace("-","");
+        //         var key = date + String(this.count).padStart(3, '0');
+        //         this.form.key = key;
+        //         this.count++;
+        //     }
+        // }
     }
 };
 </script>
