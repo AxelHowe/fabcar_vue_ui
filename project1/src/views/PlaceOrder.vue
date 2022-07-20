@@ -640,7 +640,7 @@ export default {
             }
         },
         changePassword(){//更改密碼
-            
+            // this.$router.push({path:'/change'});
         },
         logout(){//登出
             localStorage.removeItem('username');
