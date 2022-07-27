@@ -529,9 +529,9 @@ export default {
         },
         selectRole(){//因應使用者身份改變按鈕的禁用狀態
             var arr=[];
-            if(this.role==="order"){
+            if(this.role==="supplier"){
                 arr=["2","3","6"];
-            }else if(this.role==="supplier"){
+            }else if(this.role==="order"){
                 arr=["1","4","5","7","8"];
             }
             arr.forEach(function(value){
