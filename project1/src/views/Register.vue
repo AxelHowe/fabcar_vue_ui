@@ -43,7 +43,7 @@ export default {
 
             localStorage.setItem('username',this.form.username);
             // localStorage.setItem('token',res.token);
-            localStorage.setItem('role',role);
+            localStorage.setItem('role',this.form.role);
             this.$router.push({path:'/'});
         },
     }
