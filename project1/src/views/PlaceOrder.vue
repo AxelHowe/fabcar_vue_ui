@@ -214,7 +214,7 @@ export default {
             url:"/createReports",//預設API
             proStatus: 0,
             process:"",
-            role: localStorage.getItem('role'),
+            role: "supplier",//localStorage.getItem('role'),
             user_name: localStorage.getItem('username'),
             rule:{},//表單驗證規則
             form: {//顯示在欄位上的資料
@@ -670,12 +670,12 @@ export default {
                 this.checkDisable.check1=true;
                 this.checkDisable.check2=true;
                 this.checkDisable.check3=true;
-                this.checkDisable.check4=true;   
-                this.checkDisable.check5=true;  
+                this.checkDisable.check4=true;
+                this.checkDisable.check5=true;
                 this.rule={
                     note:[{required: true, message:"欄位不可為空！"}],
                     finish:[{required: true, message:"欄位不可為空！"}],                  
-                }    
+                }
             }
             this.$nextTick(function () {
                 this.$refs['form'].clearValidate();
@@ -714,19 +714,17 @@ export default {
                 this.url="createReports";
             }else if(state==2){
                 this.url="reports/changeSigner";
-            }else if(state==4){
+            }else if(state==3){
                 this.url="reports/changeSdate";
-            }else if(state==5){
+            }else if(state==4){
                 this.url="reports/changeSbad";
-            }else if(state==6){
+            }else if(state==5){
                 this.url="reports/changeOcargo";
-            }else if(state==7){
-                this.url="reports/changeCcargo";
-            }else if(state==8){
+            }else if(state==6){
                 this.url="reports/changeInvoice";
-            }else if(state==9){
+            }else if(state==7){
                 this.url="reports/changeCbill";
-            }else if(state==10){
+            }else if(state==8){
                 this.url="reports/Finish";
             }
         },

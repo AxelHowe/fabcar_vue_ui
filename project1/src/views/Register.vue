@@ -43,9 +43,9 @@ export default {
             console.log(res.reports);
 
             localStorage.setItem('username',this.form.username);
-            localStorage.setItem('token',res.token);
-            localStorage.setItem('role',res.role);
-            this.$router.push({path:'/placeOrder'});
+            // localStorage.setItem('token',res.token);
+            localStorage.setItem('role',role);
+            this.$router.push({path:'/'});
         },
     }
 };
