@@ -214,7 +214,7 @@ export default {
             url:"/createReports",//預設API
             proStatus: 0,
             process:"",
-            role: "supplier",//localStorage.getItem('role'),
+            role: localStorage.getItem('role'),
             user_name: localStorage.getItem('username'),
             rule:{},//表單驗證規則
             form: {//顯示在欄位上的資料
@@ -529,9 +529,9 @@ export default {
         },
         selectRole(){//因應使用者身份改變按鈕的禁用狀態
             var arr=[];
-            if(this.role==="supplier"){
+            if(this.role=="supplier"){
                 arr=["2","3","6"];
-            }else if(this.role==="order"){
+            }else if(this.role=="order"){
                 arr=["1","4","5","7","8"];
             }
             arr.forEach(function(value){
