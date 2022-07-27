@@ -40,7 +40,6 @@ export default {
             let res = this.$POST(url, params);
             
             console.log(res);
-            console.log(res.reports);
 
             localStorage.setItem('username',this.form.username);
             // localStorage.setItem('token',res.token);
